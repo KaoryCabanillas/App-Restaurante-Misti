@@ -156,8 +156,8 @@
         app:layout_constraintVertical_bias="0.276" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
         android:background="#FF5722"
         android:backgroundTint="#FF5722"
         android:orientation="horizontal"
@@ -203,20 +203,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.663" />
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="87dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="172dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="176dp"
@@ -235,5 +221,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="147dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="86dp"
+        android:layout_height="22dp"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="510dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
