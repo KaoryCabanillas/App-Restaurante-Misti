@@ -5,28 +5,89 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/btn_nuevo_pedido"
+        android:layout_width="153dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#FF5722"
+        android:text="NUEVO PEDIDO"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/add_24px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_lista_pedidos"
+        android:layout_width="153dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FF5722"
+        android:text="LISTA DE PEDIDOS"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/menu_24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_nuevo_pedido" />
+
+    <Button
+        android:id="@+id/btn_cerrar"
+        android:layout_width="153dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FF5722"
+        android:text="CERRAR"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/exit_to_app_24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lista_pedidos" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PLATILLOS"
-        android:onClick="ViewPlatillo"
+        android:fontFamily="sans-serif-black"
+        android:text="RESTURANTE MISTI"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.103" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="220dp"
+        android:layout_height="321dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cerrar"
+        app:srcCompat="@drawable/misti" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="130dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="282dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
