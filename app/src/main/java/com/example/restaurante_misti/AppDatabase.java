@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 @Database(
-        entities = {PlatilloEntity.class},
+        entities = {PlatilloEntity.class, MesaEntity.class},
         version = 1,
         exportSchema = false
 )
