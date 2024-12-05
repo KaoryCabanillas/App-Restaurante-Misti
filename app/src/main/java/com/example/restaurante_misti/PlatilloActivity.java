@@ -41,7 +41,8 @@ public class PlatilloActivity extends AppCompatActivity {
                 getApplicationContext(),
                 AppDatabase.class,
                 "Restaurante-Misti"
-        ).build();
+        ).fallbackToDestructiveMigration().build();
+        Log.d("", "InsertarPlatillo: BD CREADA");
 
         platilloDao = db.platilloDao();
 
@@ -57,7 +58,7 @@ public class PlatilloActivity extends AppCompatActivity {
 
     public void InsertarPlatillo(View view)
     {
-        String nombre = txt_nombre.getText().toString();
+        String nombre = txt_nombre.getText().toString().toUpperCase();
         String precio_string = txt_precio.getText().toString();
 
         if( !nombre.isEmpty() && !precio_string.isEmpty() )
@@ -66,25 +67,42 @@ public class PlatilloActivity extends AppCompatActivity {
             PlatilloEntity platillo = new PlatilloEntity(nombre, precio);
 
             executor.execute(
-                    () -> {
+                () -> {
+                    try
+                    {
                         platilloDao.nuevoPlatillo(platillo);
+                        Log.d("", "InsertarPlatillo: PLATILLO INSERTADO");
                         runOnUiThread(
-                                () -> {
-                                    Toast.makeText(PlatilloActivity.this , "Platillo guardado", Toast.LENGTH_SHORT).show();
-                                    ListarPlatillo();
-                                }
+                            () -> {
+                                Toast.makeText(PlatilloActivity.this , "PLATILLO GUARDADO.", Toast.LENGTH_SHORT).show();
+                                txt_nombre.setText("");
+                                txt_precio.setText("");
+                                ListarPlatillo();
+                            }
                         );
                     }
+                    catch (Exception e)
+                    {
+                        Log.d("", "InsertarPlatillo: ERROR AL INSERTAR EN HILOS", e);
+                        runOnUiThread(() -> Toast.makeText(PlatilloActivity.this, "ERROR AL INSERTAR EL PLATILLO.", Toast.LENGTH_SHORT).show());
+                    }
+                }
             );
         }
-
+        else
+        {
+            runOnUiThread(() -> Toast.makeText(PlatilloActivity.this, "CAMPOS INCOMPLETOS.", Toast.LENGTH_SHORT).show());
+            Log.d("", "InsertarPlatillo: ERROR AL INSERTAR");
+        }
     }
 
     public void ListarPlatillo()
     {
         executor.execute(
-                () -> {
+            () -> {
+                try {
                     List<PlatilloEntity> platillos = platilloDao.listadoPlatillo();
+
                     runOnUiThread(
                             () -> {
                                 ArrayAdapter<PlatilloEntity> adapter = new ArrayAdapter<>(
@@ -94,11 +112,20 @@ public class PlatilloActivity extends AppCompatActivity {
                                         platillos
                                 );
                                 lista_platillos.setAdapter(adapter);
+                                Log.d("", "InsertarPlatillo: LISTADO DE PLATILLOS");
+
                             }
                     );
                 }
+                catch (Exception e)
+                {
+                    runOnUiThread(() -> {
+                        Log.e("PlatilloActivity", "InsertarPlatillo: Error al listar platillos", e);
+                        Toast.makeText(PlatilloActivity.this, "Error al listar platillos", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
         );
     }
-
 
 }

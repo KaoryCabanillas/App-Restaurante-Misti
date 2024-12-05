@@ -10,12 +10,6 @@ public class MesaEntity {
     private int id;
     private String n_mesa;
 
-    public MesaEntity(String n_mesa) {
-        this.n_mesa = n_mesa;
-    }
-
-    public MesaEntity(){}
-
     public int getId() {
         return id;
     }
@@ -24,7 +18,16 @@ public class MesaEntity {
         this.id = id;
     }
 
+    public String getN_mesa() {
+        return n_mesa;
+    }
+
     public void setN_mesa(String n_mesa) {
+        this.n_mesa = n_mesa;
+    }
+
+    public MesaEntity(int id, String n_mesa) {
+        this.id = id;
         this.n_mesa = n_mesa;
     }
 }

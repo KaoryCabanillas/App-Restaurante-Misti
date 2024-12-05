@@ -12,13 +12,15 @@
         android:id="@+id/btn_nuevo_pedido"
         android:layout_width="153dp"
         android:layout_height="65dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#FF5722"
+        android:onClick="ViewNuevoPedido"
         android:text="NUEVO PEDIDO"
         android:textSize="16sp"
         android:textStyle="bold"
         app:icon="@drawable/add_24px"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -26,14 +28,15 @@
         android:id="@+id/btn_lista_pedidos"
         android:layout_width="153dp"
         android:layout_height="65dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FF5722"
+        android:onClick="ViewPedidos"
         android:text="LISTA DE PEDIDOS"
         android:textSize="16sp"
         android:textStyle="bold"
         app:icon="@drawable/menu_24px"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_nuevo_pedido" />
 
@@ -41,16 +44,33 @@
         android:id="@+id/btn_cerrar"
         android:layout_width="153dp"
         android:layout_height="65dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FF5722"
+        android:drawableTint="#FFFFFF"
+        android:onClick="ViewPlatillo"
+        android:text="MENÚ \n DEL DIA"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:icon="@drawable/menu_book_24px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lista_pedidos" />
+
+    <Button
+        android:id="@+id/btn_nuevo_platillo"
+        android:layout_width="153dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FF5722"
         android:text="CERRAR"
         android:textSize="16sp"
         android:textStyle="bold"
         app:icon="@drawable/exit_to_app_24px"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_lista_pedidos" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cerrar" />
 
     <TextView
         android:id="@+id/textView"
@@ -62,32 +82,20 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.071" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="220dp"
         android:layout_height="321dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cerrar"
+        app:layout_constraintTop_toBottomOf="@+id/btn_nuevo_platillo"
         app:srcCompat="@drawable/misti" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="130dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="282dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
