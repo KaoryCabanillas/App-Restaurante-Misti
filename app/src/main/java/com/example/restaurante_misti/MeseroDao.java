@@ -13,6 +13,6 @@ public interface MeseroDao {
     List<MeseroEntity> listadoMeseros();
 
     @Insert
-    void nuevoMesero(MesaEntity mesero);
+    void nuevoMesero(MeseroEntity mesero);
 
 }
