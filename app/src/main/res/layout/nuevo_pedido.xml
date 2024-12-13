@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.193" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/sp_mesas"
         android:layout_width="176dp"
         android:layout_height="28dp"
         android:layout_marginStart="12dp"
@@ -170,7 +170,7 @@
         app:layout_constraintVertical_bias="0.663" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/sp_platillo"
         android:layout_width="176dp"
         android:layout_height="28dp"
         android:layout_marginStart="20dp"
@@ -182,7 +182,7 @@
         app:layout_constraintVertical_bias="0.425" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtPrecio"
         android:layout_width="86dp"
         android:layout_height="22dp"
         tools:layout_editor_absoluteX="146dp"

@@ -26,8 +26,7 @@ public class MesaEntity {
         this.n_mesa = n_mesa;
     }
 
-    public MesaEntity(int id, String n_mesa) {
-        this.id = id;
+    public MesaEntity(String n_mesa) {
         this.n_mesa = n_mesa;
     }
 }
