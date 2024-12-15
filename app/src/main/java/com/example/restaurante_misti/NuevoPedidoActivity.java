@@ -2,6 +2,7 @@ package com.example.restaurante_misti;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -30,6 +31,8 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     private ExecutorService executor;
     private TextView txtPrecio;
     private Spinner sp_meseros, sp_platillo, sp_mesas;
+
+    private List<PlatilloEntity> platillos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +56,10 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         sp_mesas = findViewById(R.id.sp_mesas);
         txtPrecio = findViewById(R.id.txtPrecio);
 
-        validarMeseros();
-        validarMesas();
-        listarMeseros();
+        validarMeseros(); // valida, si no hay inserta y lista, y si no, solo lista
+        validarMesas(); // valida, si no hay inserta y lista, y si no, solo lista
         listarPlatillos();
-        listarMesas();
+        capturarPrecioPlatillo();
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -106,6 +108,10 @@ public class NuevoPedidoActivity extends AppCompatActivity {
                     try {
                         if (listadoMeserosVacios()) {
                             insertarMeseros();
+                            listarMeseros();
+                        }
+                        else {
+                            listarMeseros();
                         }
                     } catch (Exception e) {
                         Log.d("", "InsertarMeseros: ERROR AL INSERTAR LOS MESEROS", e);
@@ -118,6 +124,10 @@ public class NuevoPedidoActivity extends AppCompatActivity {
                     try {
                         if (listadoMesasVacias()) {
                             insertarMesas();
+                            listarMesas();
+                        }
+                        else {
+                            listarMesas();
                         }
                     } catch (Exception e) {
                         Log.d("", "InsertarMesas: ERROR AL INSERTAR LAS MESAS", e);
@@ -139,7 +149,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     private void listarPlatillos() {
         executor.execute(() -> {
             try {
-                List<PlatilloEntity> platillos = platilloDao.listadoPlatillo();
+                this.platillos = platilloDao.listadoPlatillo();
 
                 // Usar la función genérica para listar platillos
                 listarElementos(platillos, sp_platillo, PlatilloEntity::getNombre);
@@ -153,7 +163,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         executor.execute(() -> {
             try {
                 List<MesaEntity> mesas = mesaDao.listadoMesas();
-                // Usar la función genérica para listar platillos
+                // Usar la función genérica para listar mesas
                 listarElementos(mesas, sp_mesas, MesaEntity::getN_mesa);
             } catch (Exception e) {
                 Log.e("NuevoPedidoActivity", "Error al listar las mesas", e);
@@ -186,4 +196,24 @@ public class NuevoPedidoActivity extends AppCompatActivity {
         });
     }
 
+    private void capturarPrecioPlatillo()
+    {
+        sp_platillo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Obtener el PlatilloEntity completo usando la posición
+                PlatilloEntity platilloSeleccionado = platillos.get(position);
+
+                // Obtener y mostrar el precio del platillo seleccionado
+                String precio = "S/"+platilloSeleccionado.getPrecio();
+                txtPrecio.setText(precio);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                txtPrecio.setText("----");
+            }
+        });
+
+    }
 }
