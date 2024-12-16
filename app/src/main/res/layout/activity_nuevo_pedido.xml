@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF5722"
+        android:onClick="guardarPedido"
         android:text="GUARDAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF5722"
+        android:onClick="agregarDetallePedido"
         android:text="AGREGAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
@@ -153,7 +155,7 @@
         app:layout_constraintVertical_bias="0.574" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/txtCantidad"
         android:layout_width="101dp"
         android:layout_height="43dp"
         android:ems="10"

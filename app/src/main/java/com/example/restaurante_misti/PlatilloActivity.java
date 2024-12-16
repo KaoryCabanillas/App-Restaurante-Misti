@@ -42,7 +42,6 @@ public class PlatilloActivity extends AppCompatActivity {
                 AppDatabase.class,
                 "Restaurante-Misti"
         ).fallbackToDestructiveMigration().build();
-        Log.d("", "InsertarPlatillo: BD CREADA");
 
         platilloDao = db.platilloDao();
 

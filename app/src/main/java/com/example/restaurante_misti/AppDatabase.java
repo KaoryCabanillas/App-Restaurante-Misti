@@ -7,9 +7,11 @@ import androidx.room.RoomDatabase;
         entities = {
             PlatilloEntity.class,
             MesaEntity.class,
-            MeseroEntity.class
+            MeseroEntity.class,
+            PedidoEntity.class,
+            PedidoDetalleEntity.class
         },
-        version = 3,
+        version = 5,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -19,5 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MesaDao mesaDao();
 
     public abstract MeseroDao meseroDao();
+    
+    public abstract  PedidoDao pedidoDao();
 
 }
