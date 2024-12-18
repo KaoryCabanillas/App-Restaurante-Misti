@@ -287,14 +287,21 @@ public class NuevoPedidoActivity extends AppCompatActivity {
                 sp_mesas.setEnabled(false);
 
                 int cantidad = Integer.parseInt(cantidad_string);
-                float subtotal = cantidad * platillo_precio;
 
-                PedidoDetalleEntity nuevo_detalle = new PedidoDetalleEntity(cantidad, subtotal, platillo_id);
-                Log.d("", "agregarDetallePedido: "+nuevo_detalle);
-                detalles_pedidos.add(nuevo_detalle);
-                txtCantidad.setText("");
-                Toast.makeText(NuevoPedidoActivity.this , "PLATILLO AGREGAGADO AL PEDIDO!", Toast.LENGTH_SHORT).show();
+                if(cantidad > 0) {
 
+                    float subtotal = cantidad * platillo_precio;
+
+                    PedidoDetalleEntity nuevo_detalle = new PedidoDetalleEntity(cantidad, subtotal, platillo_id);
+                    Log.d("", "agregarDetallePedido: " + nuevo_detalle);
+                    detalles_pedidos.add(nuevo_detalle);
+                    txtCantidad.setText("");
+                    Toast.makeText(NuevoPedidoActivity.this, "PLATILLO AGREGAGADO AL PEDIDO!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(NuevoPedidoActivity.this , "INGRESE UNA CANTIDAD MAYOR A 0!", Toast.LENGTH_SHORT).show();
+                }
             }
             else
             {
