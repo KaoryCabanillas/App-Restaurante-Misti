@@ -1,8 +1,10 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Pedido;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.restaurante_misti.Platillo.PlatilloEntity;
 
 @Entity(
         foreignKeys = {

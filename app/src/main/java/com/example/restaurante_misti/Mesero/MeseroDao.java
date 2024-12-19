@@ -1,4 +1,4 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Mesero;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

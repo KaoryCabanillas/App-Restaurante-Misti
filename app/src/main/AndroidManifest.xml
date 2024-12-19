@@ -13,16 +13,19 @@
         android:theme="@style/Theme.Restaurante_Misti"
         tools:targetApi="31">
         <activity
-            android:name=".NuevoPedidoActivity"
+            android:name=".PedidoDetalleActivity"
             android:exported="false" />
         <activity
-            android:name=".OrdenActivity"
+            android:name=".Pedido.NuevoPedidoActivity"
             android:exported="false" />
         <activity
-            android:name=".PedidosActivity"
+            android:name=".Orden.OrdenActivity"
             android:exported="false" />
         <activity
-            android:name=".PlatilloActivity"
+            android:name=".Pedido.PedidosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Platillo.PlatilloActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

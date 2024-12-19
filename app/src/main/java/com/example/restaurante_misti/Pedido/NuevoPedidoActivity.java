@@ -1,10 +1,9 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Pedido;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,13 +16,22 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
+import com.example.restaurante_misti.AppDatabase;
+import com.example.restaurante_misti.Mesa.MesaDao;
+import com.example.restaurante_misti.Mesa.MesaEntity;
+import com.example.restaurante_misti.Mesero.MeseroDao;
+import com.example.restaurante_misti.Mesero.MeseroEntity;
+import com.example.restaurante_misti.Platillo.PlatilloDao;
+import com.example.restaurante_misti.Platillo.PlatilloEntity;
+import com.example.restaurante_misti.R;
+import com.example.restaurante_misti.Utils.SpinnerUtilClass;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 
 public class NuevoPedidoActivity extends AppCompatActivity {
 
@@ -39,11 +47,9 @@ public class NuevoPedidoActivity extends AppCompatActivity {
     private List<PlatilloEntity> platillos;
     private List<MeseroEntity> meseros;
     private List<MesaEntity> mesas;
-    private int platillo_id, mesa_id, mesero_id, pedido_id = 0;
+    private int platillo_id, mesa_id, mesero_id;
     private float platillo_precio;
     private List<PedidoDetalleEntity> detalles_pedidos;
-    private PedidoEntity nuevo_pedido;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +165,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             try {
                 this.meseros = meseroDao.listadoMeseros();
                 // Usar la función genérica para listar meseros
-                listarElementos(meseros, sp_meseros, MeseroEntity::getNombre);
+                SpinnerUtilClass.listarElementos(this, executor, meseros, sp_meseros, MeseroEntity::getNombre);
             } catch (Exception e) {
                 Log.e("NuevoPedidoActivity", "Error al listar los meseros", e);
             }
@@ -172,7 +178,7 @@ public class NuevoPedidoActivity extends AppCompatActivity {
                 this.platillos = platilloDao.listadoPlatillo();
 
                 // Usar la función genérica para listar platillos
-                listarElementos(platillos, sp_platillo, PlatilloEntity::getNombre);
+                SpinnerUtilClass.listarElementos(this, executor, platillos, sp_platillo, PlatilloEntity::getNombre);
             } catch (Exception e) {
                 Log.e("NuevoPedidoActivity", "Error al listar los platillos", e);
             }
@@ -184,35 +190,9 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             try {
                 this.mesas = mesaDao.listadoMesas();
                 // Usar la función genérica para listar mesas
-                listarElementos(mesas, sp_mesas, MesaEntity::getN_mesa);
+                SpinnerUtilClass.listarElementos(this, executor, mesas, sp_mesas, MesaEntity::getN_mesa);
             } catch (Exception e) {
                 Log.e("NuevoPedidoActivity", "Error al listar las mesas", e);
-            }
-        });
-    }
-
-    private <T> void listarElementos(List<T> elementos, Spinner spinner, Function<T, String> getNombreFunc) {
-        executor.execute(() -> {
-            try {
-                // Crear una lista de nombres
-                List<String> nombres = new ArrayList<>();
-                for (T elemento : elementos) {
-                    nombres.add(getNombreFunc.apply(elemento));  // Usamos la función para obtener el nombre
-                }
-
-                // Actualizar el Spinner en el hilo principal
-                runOnUiThread(() -> {
-                    // Crear un ArrayAdapter con los nombres
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                            NuevoPedidoActivity.this,
-                            android.R.layout.simple_spinner_item,
-                            nombres
-                    );
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(adapter);
-                });
-            } catch (Exception e) {
-                Log.e("NuevoPedidoActivity", "Error al listar los elementos", e);
             }
         });
     }
@@ -314,11 +294,11 @@ public class NuevoPedidoActivity extends AppCompatActivity {
 
     public void guardarPedido(View view)
     {
-        if(!detalles_pedidos.isEmpty()) {
+        if(!detalles_pedidos.isEmpty())
+        {
             executor.execute(
                     () -> {
                         try {
-
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                             Date fecha = new Date();
                             String fecha_formateada = sdf.format(fecha);
@@ -327,7 +307,6 @@ public class NuevoPedidoActivity extends AppCompatActivity {
                             pedidoDao.insertarPedidoConDetalles(nuevoPedido, detalles_pedidos);
 
                             detalles_pedidos.clear();
-
 
                             runOnUiThread(() -> {
                                 sp_meseros.setEnabled(true);
@@ -346,6 +325,4 @@ public class NuevoPedidoActivity extends AppCompatActivity {
             Toast.makeText(NuevoPedidoActivity.this, "AGREGUE ALGUN PLATILLO.", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

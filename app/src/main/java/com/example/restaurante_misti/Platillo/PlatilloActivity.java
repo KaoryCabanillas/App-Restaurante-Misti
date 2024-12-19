@@ -1,4 +1,4 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Platillo;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
+
+import com.example.restaurante_misti.AppDatabase;
+import com.example.restaurante_misti.R;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

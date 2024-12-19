@@ -1,5 +1,6 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Pedido;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
+
+import com.example.restaurante_misti.AppDatabase;
+import com.example.restaurante_misti.Orden.OrdenActivity;
+import com.example.restaurante_misti.R;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -53,7 +58,7 @@ public class PedidosActivity extends AppCompatActivity {
         executor.execute(
                 () -> {
                     try {
-                        List<PedidoListadoEntity> pedidos = pedidoDao.ListadoPedidos();
+                        List<PedidoListadoEntity> pedidos = pedidoDao.ListadoPedidosHechos();
 
                         runOnUiThread(
                                 () -> {
@@ -66,6 +71,17 @@ public class PedidosActivity extends AppCompatActivity {
                                     lista_pedidos.setAdapter(adapter);
                                     Log.d("", "InsertarPlatillo: LISTADO DE PLATILLOS");
 
+                                    lista_pedidos.setOnItemClickListener((parent, view, position, id) -> {
+
+                                        PedidoListadoEntity pedidoSeleccionado = (PedidoListadoEntity) parent.getItemAtPosition(position);
+                                        int pedidoID = pedidoSeleccionado.getId_pedido();
+
+                                        //Redirigir pantalla con el id segun el pedido clickeado
+                                        Intent intentDetallePedido = new Intent(this, OrdenActivity.class);
+                                        intentDetallePedido.putExtra("pedido_id", pedidoID);
+                                        startActivity(intentDetallePedido);
+
+                                    });
                                 }
                         );
                     } catch (Exception e)
