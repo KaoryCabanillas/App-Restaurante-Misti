@@ -82,20 +82,29 @@ public class OrdenActivity extends AppCompatActivity {
                     try {
                         ordenDetalle = pedidoDao.ordenDetalles(pedido_id);
 
-                        PedidoEntity pedido = ordenDetalle.pedido;
-                        List<PedidoDetalleEntity> detalles = ordenDetalle.detalle_pedido;
+                        if (ordenDetalle != null) {
+                            runOnUiThread(() -> {
+                                PedidoEntity pedido = ordenDetalle.pedido;
+                                List<PedidoDetalleEntity> detalles = ordenDetalle.detalle_pedido;
 
-                        for (PedidoDetalleEntity detalle : detalles) {
+                                // Mostrar datos del pedido
+                                ((TextView) findViewById(R.id.textView9)).setText(String.valueOf(pedido.getId()));
+                                ((TextView) findViewById(R.id.textView19)).setText(pedido.getFecha());
+                                ((TextView) findViewById(R.id.textView3)).setText(pedido.getMesa_id());
 
-                            // Manejar los componentes xml y mostrar por cada detalle
-                            Log.d("OrdenDetalle", "Platillo ID: " + detalle.getPlatillo_id() + ", Cantidad: " + detalle.getCantidad());
-
-                        }
-                        /*runOnUiThread(
-                                () -> {
-                                    txt_cantidad.setText(""+ordenDetalle.detalle_pedido.getCantidad());
+                                // Procesar cada detalle
+                                if (!detalles.isEmpty()) {
+                                    PedidoDetalleEntity detalle = detalles.get(0); // Muestra el primero como ejemplo
+                                    PlatilloEntity platillo = platilloDao.obtenerPlatilloPorId(detalle.getPlatillo_id()); // Asumiendo que tienes acceso al DAO
+                                    float precioUnitario = platillo.getPrecio();
+                                    spn_platillo.setSelection(detalle.getPlatillo_id());
+                                    txt_cantidad.setText(String.valueOf(detalle.getCantidad()));
+                                    txt_precio_unitario.setText(String.format("%.2f",precioUnitario));
+                                    txt_subtotal.setText(String.format("%.2f", detalle.getSubtotal()));
+                                    txt_total.setText(String.format("%.2f", pedido.getTotal()));
                                 }
-                        );*/
+                            });
+                        }
 
                     } catch (Exception e) {
                         runOnUiThread(() -> {
@@ -126,7 +135,9 @@ public class OrdenActivity extends AppCompatActivity {
                 return i;  // Retorna la posición del platillo en la lista
             }
         }
-        return -1;
+        return 0;
     }
+
+
 
 }

@@ -15,4 +15,7 @@ public interface PlatilloDao {
     @Insert
     void nuevoPlatillo(PlatilloEntity platillo);
 
+    @Query("SELECT * FROM PlatilloEntity WHERE id = :platilloId")
+    PlatilloEntity obtenerPlatilloPorId(int platilloId);
+
 }

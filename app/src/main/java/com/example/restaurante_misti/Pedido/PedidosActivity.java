@@ -81,6 +81,7 @@ public class PedidosActivity extends AppCompatActivity {
                                         intentDetallePedido.putExtra("pedido_id", pedidoID);
                                         startActivity(intentDetallePedido);
 
+
                                     });
                                 }
                         );
