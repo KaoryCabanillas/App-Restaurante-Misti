@@ -1,10 +1,11 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Pedido;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
-import androidx.room.Update;
+
+import com.example.restaurante_misti.Orden.OrdenDetalleEntity;
 
 import java.util.List;
 
@@ -45,5 +46,9 @@ public interface PedidoDao {
             "FROM PedidoEntity AS p " +
             "JOIN MesaEntity AS m ON p.mesa_id = m.id " +
             "JOIN MeseroEntity AS me ON p.mesero_id = me.id")
-    List<PedidoListadoEntity> ListadoPedidos();
+    List<PedidoListadoEntity> ListadoPedidosHechos();
+
+    @Transaction
+    @Query("SELECT * FROM PedidoEntity WHERE id = :pedido_id")
+    OrdenDetalleEntity ordenDetalles(int pedido_id);
 }

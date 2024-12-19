@@ -10,6 +10,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.restaurante_misti.Pedido.NuevoPedidoActivity;
+import com.example.restaurante_misti.Pedido.PedidosActivity;
+import com.example.restaurante_misti.Platillo.PlatilloActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppDatabase db;

@@ -1,4 +1,4 @@
-package com.example.restaurante_misti;
+package com.example.restaurante_misti.Pedido;
 
 import androidx.room.Entity;
 
