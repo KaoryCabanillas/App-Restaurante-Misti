@@ -82,29 +82,20 @@ public class OrdenActivity extends AppCompatActivity {
                     try {
                         ordenDetalle = pedidoDao.ordenDetalles(pedido_id);
 
-                        if (ordenDetalle != null) {
-                            runOnUiThread(() -> {
+                        runOnUiThread(() -> {
+                            if (ordenDetalle != null) {
                                 PedidoEntity pedido = ordenDetalle.pedido;
                                 List<PedidoDetalleEntity> detalles = ordenDetalle.detalle_pedido;
 
-                                // Mostrar datos del pedido
-                                ((TextView) findViewById(R.id.textView9)).setText(String.valueOf(pedido.getId()));
-                                ((TextView) findViewById(R.id.textView19)).setText(pedido.getFecha());
-                                ((TextView) findViewById(R.id.textView3)).setText(pedido.getMesa_id());
+                                // Ejemplo de asignación de datos a componentes
+                                txt_cantidad.setText(detalles.get(0).getCantidad() + "");
+                                txt_subtotal.setText("S/ " + detalles.get(0).getSubtotal());
+                                txt_total.setText("S/ " + pedido.getTotal());
 
-                                // Procesar cada detalle
-                                if (!detalles.isEmpty()) {
-                                    PedidoDetalleEntity detalle = detalles.get(0); // Muestra el primero como ejemplo
-                                    PlatilloEntity platillo = platilloDao.obtenerPlatilloPorId(detalle.getPlatillo_id()); // Asumiendo que tienes acceso al DAO
-                                    float precioUnitario = platillo.getPrecio();
-                                    spn_platillo.setSelection(detalle.getPlatillo_id());
-                                    txt_cantidad.setText(String.valueOf(detalle.getCantidad()));
-                                    txt_precio_unitario.setText(String.format("%.2f",precioUnitario));
-                                    txt_subtotal.setText(String.format("%.2f", detalle.getSubtotal()));
-                                    txt_total.setText(String.format("%.2f", pedido.getTotal()));
-                                }
-                            });
-                        }
+                                int pos = getPosicionPlatilloByID(platillos, detalles.get(0).getPlatillo_id());
+                                spn_platillo.setSelection(pos);
+                            }
+                        });
 
                     } catch (Exception e) {
                         runOnUiThread(() -> {
